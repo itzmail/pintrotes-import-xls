@@ -11,7 +11,11 @@ const ExcelImporter: React.FC<ExcelImporterProps> = ({ onDataImported }) => {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+    // cek jika tidak ada file yang diupload dan formatnya excel
+    if (!file || !file.name.match(/\.(xlsx|xls)$/)) {
+      alert('Please upload an Excel file.');
+      return;
+    }
 
     setFileName(file.name);
     const reader = new FileReader();
